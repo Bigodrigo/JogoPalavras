@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useAuth } from "../context/Context";
 import { trim } from "../helpers/trim"
 
-export function Caixa ({show,setShow,palavra}) {
+export function Input ({show,setShow,palavra}) {
     //const { palavra } = useAuth();
     console.log(palavra, 'na caixa')
     return (
+        <form name="Rod">
         <div className="text-green-500">
             <div className="flex space-x-4 bg-white m-5 p-5 border-2 border-red-700 rounded-lg">
                 
@@ -27,11 +28,14 @@ export function Caixa ({show,setShow,palavra}) {
             </div>
             <div className="flex space-x-4 bg-white m-5 p-5 border-2 border-red-700 rounded-lg">
                 {palavra.map((letra,index) => (
-                <div  key={index} className="flex-1 p-5 shadow-md rounded-lg">
-                    {letra}
-                </div>
+                <input placeholder={index} key={index} id={index}
+                className="flex-1 p-5 shadow-md rounded-lg">
+                
+                </input>
                 ))}
             </div>
         </div>
+        <input type='submit' value='Enviar'/>
+        </form>
     )
 }

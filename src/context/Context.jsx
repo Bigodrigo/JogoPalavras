@@ -8,7 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
 
-const [ palavra, setPalavra ] = useState()
+  const [ palavra, setPalavra ] = useState('')
 
   return (
     <AuthContext.Provider value={{ palavra, setPalavra }}>

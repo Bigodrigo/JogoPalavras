@@ -9,18 +9,22 @@ import React, { useState } from 'react';
 import { AuthContextProvider, useAuth } from "../context/Context";
 //comp
 import { Caixa } from '../components/caixas'
-import { trim } from "../helpers/trim"
+import { Input } from '../components/input'
+import { trim, sort } from "../helpers/trim"
 
 export default function Home() {
-  const { setPalavra } = useAuth();
+  const [ palavra, setPalavra ] = useState()
   const [show, setShow] = useState(false)
   const getPalavras = async () => {
     const docRef = doc(db, "teste", "teste");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      setPalavra(trim(docSnap.data().p1));
-      console.log(docSnap.data().p1);
+      console.log(sort());
+      //console.log("Document data:", docSnap.data());
+      //encontrar uma forma de mudar o p2 para o sort!
+      const teste = trim(docSnap.data().p2);
+      //console.log(teste);
+      setPalavra(teste)
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
@@ -34,7 +38,7 @@ export default function Home() {
           Pronto para adivinhar uma palavra?
         </h1>
         <button onClick={()=>getPalavras()}>Clique Aqui para começar!</button>
-        { show ? <Caixa show={show} setShow={setShow} /> : <p> </p> }
+        { show ? <Input show={show} setShow={setShow} palavra={palavra}/> : <p> </p> }
       </div>
     </AuthContextProvider>
   )
